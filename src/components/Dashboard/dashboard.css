@@ -1,0 +1,37 @@
+.main-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+
+}
+
+.charts {
+    width: 80%;
+    height: 30%;
+    margin: 2vh;
+}
+
+
+
+.page-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-arround;
+}
+
+.widgets {
+    margin-left: 1rem;
+
+}
+
+
+.charts-groupe {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    height: 40VH;
+    width: 100%;
+
+}

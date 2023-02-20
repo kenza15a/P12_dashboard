@@ -1,0 +1,26 @@
+.copywrite-text {
+    display: inline;
+    writing-mode: tb-rl;
+    transform: rotate(-180deg);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+
+
+}
+
+@media only screen and (min-width : 680px) {
+    .copywrite-text {
+        display: inline;
+        writing-mode: tb-rl;
+        transform: rotate(-180deg);
+        color: white;
+        font-size: 0.6rem;
+        font-weight: 700;
+        height: 100%;
+        margin-bottom: 1rem;
+
+    }
+
+}

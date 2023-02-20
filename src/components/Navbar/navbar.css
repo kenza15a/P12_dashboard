@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+body {
+    margin: O;
+}
+
+.nav {
+    padding: 0 2% 2% 0%;
+    margin: 0%;
+    height: max-content;
+    background-color: black;
+    color: white;
+    font-family: 'Roboto';
+    font-weight: 600;
+    /*align-items: stretch;*/
+}
+
+.logo {
+    height: 3rem;
+    width: auto;
+    object-fit: contain;
+
+}
+
+.nav a {
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+}
+
+.nav-list {
+    margin: 0%;
+    padding: 0%;
+    color: inherit;
+    list-style: none;
+    font-size: 1rem;
+    display: flex;
+    gap: 5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-list li a {
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+@media only screen and (min-width : 680px) {
+    body {
+        margin: O;
+    }
+
+    .nav {
+        padding: 0 2% 2% 0%;
+        margin: 0%;
+        height: 4rem;
+        background-color: black;
+        color: white;
+        font-family: 'Roboto';
+        font-weight: 600;
+        /*align-items: stretch;*/
+    }
+
+    .logo {
+        height: 3rem;
+        width: auto;
+        object-fit: contain;
+
+    }
+
+    .nav a {
+        color: inherit;
+        text-decoration: none;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-list {
+        margin: 0%;
+        padding: 0%;
+        color: inherit;
+        list-style: none;
+        font-size: 1rem;
+        display: flex;
+        gap: 5rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-list li a {
+        font-size: 1.3rem;
+        font-weight: 900;
+    }
+}
+
+/*768 */

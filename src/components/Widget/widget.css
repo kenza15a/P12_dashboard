@@ -1,0 +1,44 @@
+.widget-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #f1f1f19e;
+    border-radius: 0.4rem;
+    width: 80%;
+    height: 8%;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    margin-left: 0;
+}
+
+.widget-icon {
+    border-radius: 0.4rem;
+
+}
+
+.widget-icon img {
+    height: 4rem;
+    width: 4rem;
+    object-fit: cover;
+}
+
+.grammage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0px;
+
+}
+
+.grammage-text {
+    font-size: 1rem;
+    color: #282D30;
+    margin-bottom: 0;
+}
+
+.unit {
+    margin-top: 0;
+    font-size: 0.8rem;
+    color: #74798C;
+}

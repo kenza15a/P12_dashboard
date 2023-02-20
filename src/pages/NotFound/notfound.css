@@ -1,0 +1,7 @@
+.message-not-found {
+    font-size: 20rem;
+    font-weight: 800;
+    color: linear-gradient(0deg, #000000, #000000),
+        linear-gradient(0deg, #FF0101, #FF0101);
+
+}
