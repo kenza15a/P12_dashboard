@@ -6,12 +6,11 @@ import calIcon from "../Widget/icons/calories-icon.png";
 import protIcon from "../Widget/icons/protein-icon.png";
 import glucIcon from "../Widget/icons/carbs-icon.png";
 import lipidIcon from "../Widget/icons/fat-icon.png";
-
 import Radarchartexp from "../RadarChart/Radarchartexp";
 import Piechartexp from "../Piechartexp/Piechartexp";
 import Linechartexp from "../Linechartexp/Linechartexp";
 import Barchartexp from "../Barchartexp/Barchartexp";
-import { userMockedService } from "../../services/userMockedService";
+import { getUserService } from "../../services/userServiceConfiguration";
 import { useParams } from "react-router-dom";
 
 function Dashboard() {
@@ -32,47 +31,75 @@ function Dashboard() {
   //const [usersessions, setUserSessions] = useState();
   useEffect(getData, [id]);
 
+  /**
+   *
+   *
+   * getdata(urlconfig)
+   * if url=dev=>service1
+   * esles service2
+   */
+
   function getData() {
     //plusieurs appel des services
-    userMockedService
+    getUserService()
       .getUserInfos(id)
       .then((userResponse) => {
         setUserLoaded(true);
         setUser(userResponse);
       })
-      .finally("error de loading des data"); //traiter le cas d'erreur
+      .catch((error) => {
+        console.log(
+          "UserInfos:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
     //barchart
-    userMockedService
+    getUserService()
       .getUserActivity(id)
       .then((userActivityResponse) => {
         setUserActivityLoaded(true);
         setUserActivity(userActivityResponse);
       })
-      .finally("error de loading des data");
+      .catch((error) => {
+        console.log(
+          "UserActivity:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
     //linechart
-    userMockedService
+    getUserService()
       .getUserAverageSession(id)
       .then((useraveragesession) => {
         setaverageSessionsLoaded(true);
         setuserAverageSessions(useraveragesession);
       })
-      .finally("error de loading des data");
+      .catch((error) => {
+        console.log(
+          "userSession:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
     //radarchart
-    userMockedService
+    getUserService()
       .getUserPerformanceData(id)
       .then((userPerformanceresp) => {
         setPerformanceLoaded(true);
         setUserPerformance(userPerformanceresp);
       })
-      .finally("error de loading des data");
+      .catch((error) => {
+        console.log(
+          "userPerformance:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
     //piechart
-    userMockedService
+    getUserService()
       .getUserGoal(id)
       .then((goalResp) => {
         setuserGoalLoaded(true);
         setUserGoal(goalResp);
       })
-      .finally("error de loading des data");
+      .catch((error) => {
+        console.log(
+          "userGoal:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
   }
 
   return (

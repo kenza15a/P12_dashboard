@@ -10,8 +10,8 @@ import "./App.css"
 function App() {
   return (
     <BrowserRouter>
-
       <Routes>
+        <Route path="/" element={<Accueil />} />
         <Route path="/Accueil/:id" element={<Accueil />} />
         <Route index element={<Accueil />} />
         <Route path="/Accueil" element={<Accueil />} />

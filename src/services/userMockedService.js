@@ -1,9 +1,12 @@
+
 import { USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_MAIN_DATA, USER_PERFORMANCE } from "../data/userMockedData";
 import { userSessions } from "../models/userSessions"
 import { userMainData } from "../models/userMainData";
 import { userActivity } from '../models/userActivity'
 import { userAverageSessions } from "../models/userAverageSessions";
 import { userPerformance } from "../models/userPerformance";
+import { element } from "prop-types";
+
 export const userMockedService = {
     getUserInfos,
     getUserPerformance,
@@ -14,6 +17,9 @@ export const userMockedService = {
     getUserPerformanceData
 
 }
+/**fetch data using axios */
+
+
 
 async function getUserInfos(userId) { //title 
 
@@ -22,10 +28,17 @@ async function getUserInfos(userId) { //title
     let userInfo = new userMainData(userData);
     return userInfo;
 }
-async function getUserActivity(userId) { //barchart 
+async function getUserActivity(userId) {
+
     const userData = USER_ACTIVITY.filter(item => item.userId === userId).shift();
     if (!userData) return Promise.reject("aucune activité trouvée")
     let userActivityFound = new userActivity(userData);
+    let i = 1;
+    //forcer les xaxis du barchart en modifiant le json en memoire
+    userActivityFound.sessions.forEach(element => {
+        Object.assign(element, { indice: i });
+        i = i + 1;
+    });
     return userActivityFound;
 }
 
@@ -86,16 +99,23 @@ async function getUserGoal(userId) { //piechart
     let userMainInfos = await (getUserInfos(userId));
     // let userScore = [{ todayScore: userMainInfos.todayScore }, { todayScore: 1 - userMainInfos.todayScore }];
     let userScore = [{ todayScore: userMainInfos.todayScore }]
-    console.log(userScore);
     return userScore;
 }
 
-
+//linechart
 async function getUserAverageSession(userId) {
-
     const userData = USER_AVERAGE_SESSIONS.filter(item => item.userId === userId).shift();
     if (!userData) return Promise.reject("aucune session moyenne trouvée")
     let foundUserSessions = new userAverageSessions(userData);
+    console.log(foundUserSessions)
+    let days = ["L", "M", "M", "J", "V", "S", "D"];
+    let i = 0;
+    foundUserSessions.sessions.forEach(element => {
+        Object.assign(element, { lDay: days[i] })
+        i = i + 1;
+
+    })
+
     return foundUserSessions;
 
 }

@@ -12,7 +12,7 @@ function Navbar() {
             </a>
           </li>
           <li>
-            <a href="/Accueil">Accueil</a>
+            <a href="/Accueil/12">Accueil</a>
           </li>
           <li>
             <a href="/Profile">Profile</a>

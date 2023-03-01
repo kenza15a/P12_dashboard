@@ -16,7 +16,7 @@ function Barchartexp({ data }) {
       <ResponsiveContainer height={200} width="100%" className="barchart">
         <BarChart width="100%" data={data}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
+          <XAxis dataKey="indice" />
           <YAxis />
           <Tooltip />
           <Bar
