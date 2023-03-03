@@ -2,3 +2,10 @@
     background-color: #fbfbfb;
     border-radius: O.2rem;
 }
+
+.legend {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+

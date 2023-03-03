@@ -1,7 +1,7 @@
 import { userMockedService } from "./userMockedService";
 import { userService } from "./userService";
-import { envirements } from "../config/config"
-const currentEnvirement = "dev";
+import { currentEnvirement, envirements } from "../config/config"
+
 //identifier l'id
 export const getUserService = () => {
     if (currentEnvirement === envirements.developpement) {

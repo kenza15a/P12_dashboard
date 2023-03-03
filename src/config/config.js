@@ -5,6 +5,6 @@ export const envirements = {
     production: "prod"
 }
 export const currentEnvirement = envirements.developpement;
-export const currentId = 12;
+export const defaulUserId = 12;
 
 //FIXER L'ID

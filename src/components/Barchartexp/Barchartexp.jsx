@@ -7,6 +7,7 @@ import {
   BarChart,
   Bar,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 import "./barchart.css";
 function Barchartexp({ data }) {
@@ -19,6 +20,15 @@ function Barchartexp({ data }) {
           <XAxis dataKey="indice" />
           <YAxis />
           <Tooltip />
+          <Legend
+            className="legend"
+            verticalAlign="top"
+            height={36}
+            iconType="circle"
+            align="right"
+          />
+          <text>Activité quotidienne</text>
+
           <Bar
             dataKey="kilogram"
             fill="#black"
