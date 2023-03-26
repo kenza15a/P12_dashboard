@@ -1,7 +1,7 @@
 .loading {
     display: grid;
     width: 100%;
-    height: 50VH;
+    height: 70vh;
 }
 
 .loading-message {
@@ -14,4 +14,44 @@
     place-self: center;
     color: #FF0101;
     font-size: 3rem;
+}
+
+.skelton-title {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    height: 20Vh;
+    background-color: yellow;
+
+
+}
+
+.skelton-barchart {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    height: 20vh;
+    background-color: yellow;
+
+}
+
+
+
+.skelton-chart-widgets {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 0px;
+    height: 55vh;
+    background-color: #FFFFFF;
+}
+
+.first-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 1rem;
+    height: 100%;
+    background-color: #FF0101;
 }

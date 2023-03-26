@@ -5,16 +5,21 @@ import Dashboard from "../../components/Dashboard/Dashboard";
 import "./accueil.css";
 import Loading from "../../components/loading/Loading";
 import { useParams } from "react-router";
+import { defaulUserId } from "../../config/config";
+/**
+ * 
+ * @returns {HTMLElement} the homePage
+ * }
+ */
 function Accueil() {
-  let { id } = useParams();
-  id = parseInt(id);
   return (
     <>
-      <Navbar />
-      <div className="container">
-        <Sidebar />
-
-        {id ? <Dashboard /> : <Loading />}
+      <div className="page-container">
+        <Navbar />
+        <div className="container">
+          <Sidebar />
+          <Dashboard />
+        </div>
       </div>
     </>
   );

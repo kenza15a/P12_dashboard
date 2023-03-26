@@ -3,9 +3,28 @@
     border-radius: O.2rem;
 }
 
-.legend {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+
+
+.legend-color-class {
+    color: gray;
+
 }
 
+.barchart-container {
+    border-radius: 0.2rem;
+    background-color: #f1f1f19e;
+
+}
+
+.custom-tooltip {
+
+    background-color: red;
+    padding: 0.5rem;
+    width: max-content;
+
+}
+
+.custom-tooltip p {
+    font-size: 0.8rem;
+    color: #ffffff;
+}

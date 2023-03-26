@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Dashboard/Dashboard.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Dashboard/Dashboard.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from "react";
+import Title from "../Title/Title";
+import Widget from "../Widget/Widget";
+import "./dashboard.css";
+import calIcon from "../Widget/icons/calories-icon.png";
+import protIcon from "../Widget/icons/protein-icon.png";
+import glucIcon from "../Widget/icons/carbs-icon.png";
+import lipidIcon from "../Widget/icons/fat-icon.png";
+import Radarchartexp from "../RadarChart/Radarchartexp";
+import RadialChart from "../RadialChart/RadialChart";
+import Linechartexp from "../Linechartexp/Linechartexp";
+import Barchartexp from "../Barchartexp/Barchartexp";
+import { getUserService } from "../../services/userServiceConfiguration";
+import { useParams } from "react-router-dom";
+import { defaulUserId } from "../../config/config";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import WidgetSkelton from "../WidgetSkelton/WidgetSkelton";
+import ChartSkelton from "../ChartSkelton/ChartSkelton";
+import NotFoundMessage from "../NotFoundMessage/NotFoundMessage";
+/**
+ * @component returns the dashboard with all the charts using the userId
+ * @returns
+ */
+
+function Dashboard() {
+  //forcer l'identifiant
+
+  let { id } = useParams();
+  const params = useParams();
+  if (!params.id) {
+    id = defaulUserId;
+  } else {
+    id = parseInt(id);
+  }
+
+  const [user, setUser] = useState();
+  const [userLoaded, setUserLoaded] = useState(false);
+  const [userActivity, setUserActivity] = useState();
+  const [userActivityLoaded, setUserActivityLoaded] = useState(false);
+  const [userAverageSessions, setuserAverageSessions] = useState();
+  const [averageSessionsLoaded, setaverageSessionsLoaded] = useState(false);
+  const [userPerformance, setUserPerformance] = useState();
+  const [userPerformanceLoaded, setPerformanceLoaded] = useState(false);
+  const [userGoal, setUserGoal] = useState();
+  const [userGoalLoaded, setuserGoalLoaded] = useState(false);
+  const [verifiedId, setVerifiedId] = useState(false);
+
+  useEffect(getData, [id]);
+
+  //function verifyId(id, userTab) {
+  /*  let idsTab = [];
+    let verified = false;
+    for (let i = 0; i &lt; userTab.length; i++) {
+      idsTab.push(userTab[i].id);
+    }
+    if (idsTab.indexOf(id) !== -1) {
+      verified = true;
+    }
+    return verified;
+  }*/
+  function getData() {
+    /*  getUserService
+      .getAllUserData()
+      .then((userIdResponse) => {
+        setVerifiedId(true);
+      
+      })
+      .catch((error) => {
+        console.log("userId:l'id n'eexiste pas");
+      });*/
+    getUserService()
+      .getUserInfos(id)
+      .then((userResponse) => {
+        // if (userResponse === 404) {
+        // setVerifiedId(true);
+        // }
+
+        setUserLoaded(true);
+        setUser(userResponse);
+      })
+      .catch((error) => {
+        console.log(
+          "UserInfos:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
+    //barchart
+    getUserService()
+      .getUserActivity(id)
+      .then((userActivityResponse) => {
+        setUserActivityLoaded(true);
+        setUserActivity(userActivityResponse);
+      })
+      .catch((error) => {
+        console.log(
+          "UserActivity:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
+    //linechart
+    getUserService()
+      .getUserAverageSession(id)
+      .then((useraveragesession) => {
+        setaverageSessionsLoaded(true);
+        setuserAverageSessions(useraveragesession);
+      })
+      .catch((error) => {
+        console.log(
+          "userSession:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
+    //radarchart
+    getUserService()
+      .getUserPerformanceData(id)
+      .then((userPerformanceresp) => {
+        setPerformanceLoaded(true);
+        setUserPerformance(userPerformanceresp);
+      })
+      .catch((error) => {
+        console.log(
+          "userPerformance:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
+    //RadialChart
+    getUserService()
+      .getUserGoal(id)
+      .then((goalResp) => {
+        setuserGoalLoaded(true);
+        setUserGoal(goalResp);
+      })
+      .catch((error) => {
+        console.log(
+          "userGoal:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+        );
+      });
+  }
+  return (
+    &lt;>
+      {userLoaded &amp;&amp; user ? (
+        &lt;div className="main-container">
+          &lt;div className="page-title">
+            {userLoaded &amp;&amp; user ? (
+              &lt;Title name={user.userInfos.firstName} />
+            ) : (
+              &lt;Skeleton height="20%" width="80%" count={2} />
+            )}
+          &lt;/div>
+          &lt;div className="page-content">
+            &lt;div className="charts">
+              &lt;div className="barchart-dashbord">
+                {userActivityLoaded &amp;&amp; userActivity ? (
+                  &lt;Barchartexp data={userActivity.sessions} />
+                ) : (
+                  &lt;Skeleton height={200} width="80%" />
+                )}
+              &lt;/div>
+              &lt;div className="charts-groupe">
+                {averageSessionsLoaded &amp;&amp; userAverageSessions ? (
+                  &lt;div>
+                    &lt;Linechartexp data={userAverageSessions.sessions} />
+                  &lt;/div>
+                ) : (
+                  &lt;ChartSkelton />
+                )}
+                {userPerformance &amp;&amp; userPerformanceLoaded ? (
+                  &lt;div>
+                    &lt;Radarchartexp data={userPerformance.data} />
+                  &lt;/div>
+                ) : (
+                  &lt;ChartSkelton />
+                )}
+                {userGoal &amp;&amp; userGoalLoaded ? (
+                  &lt;div>
+                    &lt;RadialChart data={userGoal} />
+                  &lt;/div>
+                ) : (
+                  &lt;ChartSkelton />
+                )}
+              &lt;/div>
+            &lt;/div>
+            {userLoaded &amp;&amp; user ? (
+              &lt;div className="widgets">
+                &lt;Widget
+                  icon={calIcon}
+                  grammage={user.keyData.calorieCount}
+                  unit="Calories"
+                />
+                &lt;Widget
+                  icon={protIcon}
+                  grammage={user.keyData.proteinCount}
+                  unit="Proteines"
+                />
+                &lt;Widget
+                  icon={glucIcon}
+                  grammage={user.keyData.carbohydrateCount}
+                  unit="Glucides"
+                />
+
+                &lt;Widget
+                  icon={lipidIcon}
+                  grammage={user.keyData.lipidCount}
+                  unit="Lipides"
+                />
+              &lt;/div>
+            ) : (
+              &lt;WidgetSkelton />
+            )}
+          &lt;/div>
+        &lt;/div>
+      ) : (
+        &lt;NotFoundMessage />
+      )}
+    &lt;/>
+  );
+  /*return (
+    &lt;>
+      &lt;div className="main-container">
+        &lt;div className="page-title">
+          {userLoaded &amp;&amp; user ? (
+            &lt;Title name={user.userInfos.firstName} />
+          ) : (
+            &lt;Skeleton height="20%" width="80%" count={2} />
+          )}
+        &lt;/div>
+        &lt;div className="page-content">
+          &lt;div className="charts">
+            {userActivityLoaded &amp;&amp; userActivity ? (
+              &lt;Barchartexp data={userActivity.sessions} />
+            ) : (
+              &lt;Skeleton height={200} width="80%" />
+            )}
+
+            &lt;div className="charts-groupe">
+              {averageSessionsLoaded &amp;&amp; userAverageSessions ? (
+                &lt;Linechartexp data={userAverageSessions.sessions} />
+              ) : (
+                &lt;ChartSkelton />
+              )}
+              {userPerformance &amp;&amp; userPerformanceLoaded ? (
+                &lt;Radarchartexp data={userPerformance.data} />
+              ) : (
+                &lt;ChartSkelton />
+              )}
+              {userGoal &amp;&amp; userGoalLoaded ? (
+                &lt;Piechartexp data={userGoal} />
+              ) : (
+                &lt;ChartSkelton />
+              )}
+            &lt;/div>
+          &lt;/div>
+          {userLoaded &amp;&amp; user ? (
+            &lt;div className="widgets">
+              &lt;Widget
+                icon={calIcon}
+                grammage={user.keyData.calorieCount}
+                unit="Calories"
+              />
+              &lt;Widget
+                icon={protIcon}
+                grammage={user.keyData.proteinCount}
+                unit="Proteines"
+              />
+              &lt;Widget
+                icon={glucIcon}
+                grammage={user.keyData.carbohydrateCount}
+                unit="Glucides"
+              />
+
+              &lt;Widget
+                icon={lipidIcon}
+                grammage={user.keyData.lipidCount}
+                unit="Proteines"
+              />
+            &lt;/div>
+          ) : (
+            &lt;WidgetSkelton />
+          )}
+        &lt;/div>
+      &lt;/div>
+      ;
+    &lt;/>
+  );*/
+}
+
+export default Dashboard;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barchartexp.html">Barchartexp</a></li><li><a href="Copywrite.html">Copywrite</a></li><li><a href="Dashboard.html">Dashboard</a></li><li><a href="Linechartexp.html">Linechartexp</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Radarchartexp.html">Radarchartexp</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Accueil">Accueil</a></li><li><a href="global.html#Communite">Communite</a></li><li><a href="global.html#NotFoundMessage">NotFoundMessage</a></li><li><a href="global.html#Notfound">Notfound</a></li><li><a href="global.html#Piechartexp">Piechartexp</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Reglage">Reglage</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#Sidewidget">Sidewidget</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#Widget">Widget</a></li><li><a href="global.html#getAllUserData">getAllUserData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSession">getUserAverageSession</a></li><li><a href="global.html#getUserGoal">getUserGoal</a></li><li><a href="global.html#getUserInfos">getUserInfos</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#getUserPerformanceData">getUserPerformanceData</a></li><li><a href="global.html#getUserService">getUserService</a></li><li><a href="global.html#getUserSessions">getUserSessions</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Mar 26 2023 23:57:21 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -2,8 +2,10 @@
     display: flex;
     justify-content: start;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
 }
+
+/*modif*/
 
 .container {
     height: 100%;
@@ -18,4 +20,33 @@
     -ms-box-orient: horizontal;
     box-orient: horizontal;
 
+}
+
+@media screen and (max-width: 1024px),
+screen and (max-height: 780px) {
+
+
+    .page-container {
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        height: 90vh;
+    }
+
+    /*modif*/
+
+    .container {
+        height: 100%;
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-box;
+        display: box;
+        -ms-flex-direction: row;
+        -webkit-box-orient: horizontal;
+        -moz-box-orient: horizontal;
+        -ms-box-orient: horizontal;
+        box-orient: horizontal;
+
+    }
 }

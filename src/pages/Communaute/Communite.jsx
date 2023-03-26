@@ -2,6 +2,10 @@ import React from "react";
 import "./communite.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
+/**
+ * 
+ * @returns {HTMLElement} the community page
+ */
 function Communite() {
   return (
     <>

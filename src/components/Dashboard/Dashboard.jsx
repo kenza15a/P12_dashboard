@@ -7,15 +7,32 @@ import protIcon from "../Widget/icons/protein-icon.png";
 import glucIcon from "../Widget/icons/carbs-icon.png";
 import lipidIcon from "../Widget/icons/fat-icon.png";
 import Radarchartexp from "../RadarChart/Radarchartexp";
-import Piechartexp from "../Piechartexp/Piechartexp";
+import RadialChart from "../RadialChart/RadialChart";
 import Linechartexp from "../Linechartexp/Linechartexp";
 import Barchartexp from "../Barchartexp/Barchartexp";
 import { getUserService } from "../../services/userServiceConfiguration";
 import { useParams } from "react-router-dom";
+import { defaulUserId } from "../../config/config";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import WidgetSkelton from "../WidgetSkelton/WidgetSkelton";
+import ChartSkelton from "../ChartSkelton/ChartSkelton";
+import NotFoundMessage from "../NotFoundMessage/NotFoundMessage";
+/**
+ * @component returns the dashboard with all the charts using the userId
+ * @returns
+ */
 
 function Dashboard() {
+  //forcer l'identifiant
+
   let { id } = useParams();
-  id = parseInt(id);
+  const params = useParams();
+  if (!params.id) {
+    id = defaulUserId;
+  } else {
+    id = parseInt(id);
+  }
 
   const [user, setUser] = useState();
   const [userLoaded, setUserLoaded] = useState(false);
@@ -27,23 +44,38 @@ function Dashboard() {
   const [userPerformanceLoaded, setPerformanceLoaded] = useState(false);
   const [userGoal, setUserGoal] = useState();
   const [userGoalLoaded, setuserGoalLoaded] = useState(false);
+  const [verifiedId, setVerifiedId] = useState(false);
 
-  //const [usersessions, setUserSessions] = useState();
   useEffect(getData, [id]);
 
-  /**
-   *
-   *
-   * getdata(urlconfig)
-   * if url=dev=>service1
-   * esles service2
-   */
-
+  //function verifyId(id, userTab) {
+  /*  let idsTab = [];
+    let verified = false;
+    for (let i = 0; i < userTab.length; i++) {
+      idsTab.push(userTab[i].id);
+    }
+    if (idsTab.indexOf(id) !== -1) {
+      verified = true;
+    }
+    return verified;
+  }*/
   function getData() {
-    //plusieurs appel des services
+    /*  getUserService
+      .getAllUserData()
+      .then((userIdResponse) => {
+        setVerifiedId(true);
+      
+      })
+      .catch((error) => {
+        console.log("userId:l'id n'eexiste pas");
+      });*/
     getUserService()
       .getUserInfos(id)
       .then((userResponse) => {
+        // if (userResponse === 404) {
+        // setVerifiedId(true);
+        // }
+
         setUserLoaded(true);
         setUser(userResponse);
       })
@@ -88,7 +120,7 @@ function Dashboard() {
           "userPerformance:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
         );
       });
-    //piechart
+    //RadialChart
     getUserService()
       .getUserGoal(id)
       .then((goalResp) => {
@@ -101,15 +133,92 @@ function Dashboard() {
         );
       });
   }
-
   return (
+    <>
+      {userLoaded && user ? (
+        <div className="main-container">
+          <div className="page-title">
+            {userLoaded && user ? (
+              <Title name={user.userInfos.firstName} />
+            ) : (
+              <Skeleton height="20%" width="80%" count={2} />
+            )}
+          </div>
+          <div className="page-content">
+            <div className="charts">
+              <div className="barchart-dashbord">
+                {userActivityLoaded && userActivity ? (
+                  <Barchartexp data={userActivity.sessions} />
+                ) : (
+                  <Skeleton height={200} width="80%" />
+                )}
+              </div>
+              <div className="charts-groupe">
+                {averageSessionsLoaded && userAverageSessions ? (
+                  <div>
+                    <Linechartexp data={userAverageSessions.sessions} />
+                  </div>
+                ) : (
+                  <ChartSkelton />
+                )}
+                {userPerformance && userPerformanceLoaded ? (
+                  <div>
+                    <Radarchartexp data={userPerformance.data} />
+                  </div>
+                ) : (
+                  <ChartSkelton />
+                )}
+                {userGoal && userGoalLoaded ? (
+                  <div>
+                    <RadialChart data={userGoal} />
+                  </div>
+                ) : (
+                  <ChartSkelton />
+                )}
+              </div>
+            </div>
+            {userLoaded && user ? (
+              <div className="widgets">
+                <Widget
+                  icon={calIcon}
+                  grammage={user.keyData.calorieCount}
+                  unit="Calories"
+                />
+                <Widget
+                  icon={protIcon}
+                  grammage={user.keyData.proteinCount}
+                  unit="Proteines"
+                />
+                <Widget
+                  icon={glucIcon}
+                  grammage={user.keyData.carbohydrateCount}
+                  unit="Glucides"
+                />
+
+                <Widget
+                  icon={lipidIcon}
+                  grammage={user.keyData.lipidCount}
+                  unit="Lipides"
+                />
+              </div>
+            ) : (
+              <WidgetSkelton />
+            )}
+          </div>
+        </div>
+      ) : (
+        <NotFoundMessage />
+      )}
+    </>
+  );
+  /*return (
     <>
       <div className="main-container">
         <div className="page-title">
           {userLoaded && user ? (
             <Title name={user.userInfos.firstName} />
           ) : (
-            <span>loading...</span>
+            <Skeleton height="20%" width="80%" count={2} />
           )}
         </div>
         <div className="page-content">
@@ -117,24 +226,24 @@ function Dashboard() {
             {userActivityLoaded && userActivity ? (
               <Barchartexp data={userActivity.sessions} />
             ) : (
-              <span>loading...</span>
+              <Skeleton height={200} width="80%" />
             )}
 
             <div className="charts-groupe">
               {averageSessionsLoaded && userAverageSessions ? (
                 <Linechartexp data={userAverageSessions.sessions} />
               ) : (
-                <span>loading...</span>
+                <ChartSkelton />
               )}
               {userPerformance && userPerformanceLoaded ? (
                 <Radarchartexp data={userPerformance.data} />
               ) : (
-                <span>loading...</span>
+                <ChartSkelton />
               )}
               {userGoal && userGoalLoaded ? (
                 <Piechartexp data={userGoal} />
               ) : (
-                <span>loading...</span>
+                <ChartSkelton />
               )}
             </div>
           </div>
@@ -163,14 +272,13 @@ function Dashboard() {
               />
             </div>
           ) : (
-            <div className="widgets">
-              <span>loading...</span>
-            </div>
+            <WidgetSkelton />
           )}
         </div>
       </div>
+      ;
     </>
-  );
+  );*/
 }
 
 export default Dashboard;

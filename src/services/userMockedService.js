@@ -5,7 +5,6 @@ import { userMainData } from "../models/userMainData";
 import { userActivity } from '../models/userActivity'
 import { userAverageSessions } from "../models/userAverageSessions";
 import { userPerformance } from "../models/userPerformance";
-import { element } from "prop-types";
 
 export const userMockedService = {
     getUserInfos,
@@ -14,12 +13,40 @@ export const userMockedService = {
     getUserAverageSession,
     getUserSessions,
     getUserActivity,
-    getUserPerformanceData
+    getUserPerformanceData,
+    getIdsTab,
+    getAllUserData //to verify if the id exists
 
 }
-/**fetch data using axios */
+//try to catch id  the user not found exception
+function getIdsTab() {
+    let idsTab = [];
+    for (let i = 0; i < USER_MAIN_DATA.length; i++) {
+        idsTab.push(USER_MAIN_DATA[i].id);
+    }
 
+    return idsTab;
+}
+/**
+* get all the data of all the users
 
+ * @return { Boolean } gotData
+ */
+function getAllUserData() {
+    let gotData = true;
+    const userData = USER_MAIN_DATA;
+    if (!userData) {
+        gotData = false;
+    }
+    return gotData;
+
+}
+/**
+ * Get the first part of the user info and create a model from it
+ * Used here for the title part in the dashboard component 
+ * @param { Number } userId the id of the user 
+ * @returns { Promise }
+ */
 
 async function getUserInfos(userId) { //title 
 
@@ -28,6 +55,12 @@ async function getUserInfos(userId) { //title
     let userInfo = new userMainData(userData);
     return userInfo;
 }
+/**
+ * Get a users activity using his id 
+ * this is used for the Barchart component in the dashboard
+ * @param { Number } userId the id of the user 
+ * @returns { Promise }
+ */
 async function getUserActivity(userId) {
 
     const userData = USER_ACTIVITY.filter(item => item.userId === userId).shift();
@@ -39,10 +72,17 @@ async function getUserActivity(userId) {
         Object.assign(element, { indice: i });
         i = i + 1;
     });
+    console.log(userActivityFound)
     return userActivityFound;
 }
-
-async function getUserSessions(userId) {//barchart
+/**
+ * Get the actual users sessions to display them on
+ * the bar chart of the dashboard adding an index to each day 
+ * from 1 to 7
+ * @param {Number} userId the user Id
+ * @returns { Promise }
+ */
+async function getUserSessions(userId) {
     let sessions = []
 
     getUserActivity(userId).sessions.forEach(element => {
@@ -50,8 +90,17 @@ async function getUserSessions(userId) {//barchart
 
     });
     if (!sessions) return Promise.reject("no sessions found")
+    console.log("le barchart data")
+    console.log(sessions);
     return sessions;
 }
+/**
+ * Get the actual user's performance data 
+ * Only the information we are using to build the radarchart 
+ * In the dashboard 
+ * @param { Number } userId the actual user's id
+ * @returns { Promise }
+ */
 async function getUserPerformance(userId) {
 
     const userData = USER_PERFORMANCE.filter(item => item.userId === userId).shift();
@@ -60,7 +109,13 @@ async function getUserPerformance(userId) {
     return foundUserPerformance;
 
 }
-//construire data for radar chart
+/**
+ * Get the actual user's performance data 
+ * Adds kindType to be displayed on the radarchart in the daqhboard 
+ * @param { Number } userId the actual user's id
+ * @returns { Promise }
+ */
+//Building the radarChart
 async function getUserPerformanceData(userId) {
     let data_ = await (getUserPerformance(userId))
     let kinds = data_.kind;
@@ -95,14 +150,24 @@ async function getUserPerformanceData(userId) {
     return data_;
 
 }
-async function getUserGoal(userId) { //piechart
+/**
+ * Get the users goal using his id 
+ * to build the radial Bar chart in the dashboard 
+ * @param { Number } userId 
+ * @returns { Promise }
+ */
+async function getUserGoal(userId) {
     let userMainInfos = await (getUserInfos(userId));
-    // let userScore = [{ todayScore: userMainInfos.todayScore }, { todayScore: 1 - userMainInfos.todayScore }];
     let userScore = [{ todayScore: userMainInfos.todayScore }]
     return userScore;
 }
 
-//linechart
+/**
+ *  Get users average sessions using his id
+ * to build the Line chart in the dashboard 
+ * @param { Number } userId 
+ * @returns { Promise }
+ */
 async function getUserAverageSession(userId) {
     const userData = USER_AVERAGE_SESSIONS.filter(item => item.userId === userId).shift();
     if (!userData) return Promise.reject("aucune session moyenne trouvée")

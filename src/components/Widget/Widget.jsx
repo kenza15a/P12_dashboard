@@ -2,6 +2,13 @@ import React from "react";
 import "./widget.css";
 import calIcon from "./icons/calories-icon.png";
 import PropTypes from "prop-types";
+/**
+ *
+ * @param { String } icon the Url of the icon
+ * @param { Number } grammage a value 
+ * @param {String } unit calories/proteins/glucides/Lipides
+ * @returns
+ */
 function Widget({ icon, grammage, unit }) {
   return (
     <>

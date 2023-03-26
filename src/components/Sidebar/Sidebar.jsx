@@ -6,7 +6,10 @@ import icon2 from "./icons/icon1.png";
 import icon3 from "./icons/icon2.png";
 import icon4 from "./icons/icon3.png";
 import "./sidebar.css";
-
+/**
+ * Returns the sidebar 
+ * @returns  {HtmlElement} a sidebar
+ */
 function Sidebar() {
   return (
     <>

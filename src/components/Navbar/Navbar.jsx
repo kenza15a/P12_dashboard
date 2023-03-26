@@ -1,6 +1,11 @@
 import React from "react";
 import "./navbar.css";
 import logo from "../../logo512.png";
+/** returns the navbar
+ * @component
+ *
+ *  * @returns {HTMLElement}  A navbar
+ */
 function Navbar() {
   return (
     <div>
@@ -12,7 +17,7 @@ function Navbar() {
             </a>
           </li>
           <li>
-            <a href="/Accueil/12">Accueil</a>
+            <a href="/Accueil">Accueil</a>
           </li>
           <li>
             <a href="/Profile">Profile</a>

@@ -2,6 +2,10 @@ import React from "react";
 import "./reglage.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
+/**
+ * 
+ * @returns {HTMLElement} Reglage Page 
+ */
 function Reglage() {
   return (
     <>

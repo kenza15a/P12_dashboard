@@ -1,5 +1,5 @@
-//export const myConfig = { devData: '../data/userMockedData', prodData: 'http://localhost:3000/user' };
-//fichier de config
+//configurartion file
+// Allows us to switch between the developement and the production envirements 
 export const envirements = {
     developpement: "dev",
     production: "prod"
@@ -7,4 +7,3 @@ export const envirements = {
 export const currentEnvirement = envirements.developpement;
 export const defaulUserId = 12;
 
-//FIXER L'ID

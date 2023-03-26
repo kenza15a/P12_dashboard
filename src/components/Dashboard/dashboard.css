@@ -1,28 +1,47 @@
 .main-container {
     width: 80%;
+    height: 80%;
+
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 0 2rem 0 2rem;
 
 
 }
-
-.charts {
-    width: 80%;
-    height: 30%;
-    margin: 2vh;
-}
-
-
 
 .page-content {
     display: flex;
     flex-direction: row;
     justify-content: space-arround;
+    padding: 1rem;
+    height: 80%;
+}
+
+.charts {
+    width: 80%;
+    height: 100%;
+
+}
+
+.barchart-dashbord {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    height: 50%;
+
+}
+
+.page-title {
+    margin: 1rem;
+    height: 20%;
 }
 
 .widgets {
+    width: 18%;
     margin-left: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: initial;
 
 }
 
@@ -31,7 +50,20 @@
     display: flex;
     flex-direction: row;
     gap: 2rem;
-    height: 40VH;
+    height: 50%;
     width: 100%;
 
+}
+
+.charts-groupe div {
+    flex-grow: 1;
+    flex-basis: calc(100% / 3);
+
+}
+
+.title-skelton {
+    border-radius: 0px 27px 0px 29px;
+    -moz-border-radius: 0px 27px 0px 29px;
+    -webkit-border-radius: 0px 27px 0px 29px;
+    border: 2px solid #ff0101;
 }

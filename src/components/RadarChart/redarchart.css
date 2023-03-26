@@ -2,4 +2,12 @@
     background-color: #282D30;
     border-radius: 0.2rem;
 
+
+}
+
+.recharts-polar-angle-axis-tick-value {
+    font-weight: 500;
+    font-size: 0.5rem;
+    color: #ffffff;
+
 }

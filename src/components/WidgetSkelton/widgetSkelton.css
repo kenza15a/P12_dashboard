@@ -1,0 +1,31 @@
+.widgets {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.widget-container-skel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0.4rem;
+    width: 80%;
+    height: 8%;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    margin-left: 0;
+}
+
+.widget-icon-skel {
+    border-radius: 0.4rem;
+
+}
+
+
+.grammage-skel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0px;
+
+}
