@@ -1,12 +1,22 @@
 .main-container {
     width: 80%;
     height: 80%;
-
     display: flex;
     flex-direction: column;
     padding: 0 2rem 0 2rem;
 
 
+}
+
+.message-container {
+    display: grid;
+    width: 80%;
+    height: 70%;
+
+}
+
+.message- {
+    place-self: center;
 }
 
 .page-content {

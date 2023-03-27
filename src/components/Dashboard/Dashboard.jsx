@@ -24,7 +24,7 @@ import NotFoundMessage from "../NotFoundMessage/NotFoundMessage";
  */
 
 function Dashboard() {
-  //forcer l'identifiant
+  //Imposing the default id
 
   let { id } = useParams();
   const params = useParams();
@@ -48,34 +48,14 @@ function Dashboard() {
 
   useEffect(getData, [id]);
 
-  //function verifyId(id, userTab) {
-  /*  let idsTab = [];
-    let verified = false;
-    for (let i = 0; i < userTab.length; i++) {
-      idsTab.push(userTab[i].id);
-    }
-    if (idsTab.indexOf(id) !== -1) {
-      verified = true;
-    }
-    return verified;
-  }*/
   function getData() {
-    /*  getUserService
-      .getAllUserData()
-      .then((userIdResponse) => {
-        setVerifiedId(true);
-      
-      })
-      .catch((error) => {
-        console.log("userId:l'id n'eexiste pas");
-      });*/
     getUserService()
       .getUserInfos(id)
       .then((userResponse) => {
-        // if (userResponse === 404) {
-        // setVerifiedId(true);
-        // }
-
+        if (userResponse !== 404) {
+          //in case the api is not loading
+          setVerifiedId(true);
+        }
         setUserLoaded(true);
         setUser(userResponse);
       })
@@ -135,7 +115,7 @@ function Dashboard() {
   }
   return (
     <>
-      {userLoaded && user ? (
+      {verifiedId ? (
         <div className="main-container">
           <div className="page-title">
             {userLoaded && user ? (
@@ -207,78 +187,14 @@ function Dashboard() {
           </div>
         </div>
       ) : (
-        <NotFoundMessage />
+        <div className="message-container">
+          <div className="message">
+            <NotFoundMessage />
+          </div>
+        </div>
       )}
     </>
   );
-  /*return (
-    <>
-      <div className="main-container">
-        <div className="page-title">
-          {userLoaded && user ? (
-            <Title name={user.userInfos.firstName} />
-          ) : (
-            <Skeleton height="20%" width="80%" count={2} />
-          )}
-        </div>
-        <div className="page-content">
-          <div className="charts">
-            {userActivityLoaded && userActivity ? (
-              <Barchartexp data={userActivity.sessions} />
-            ) : (
-              <Skeleton height={200} width="80%" />
-            )}
-
-            <div className="charts-groupe">
-              {averageSessionsLoaded && userAverageSessions ? (
-                <Linechartexp data={userAverageSessions.sessions} />
-              ) : (
-                <ChartSkelton />
-              )}
-              {userPerformance && userPerformanceLoaded ? (
-                <Radarchartexp data={userPerformance.data} />
-              ) : (
-                <ChartSkelton />
-              )}
-              {userGoal && userGoalLoaded ? (
-                <Piechartexp data={userGoal} />
-              ) : (
-                <ChartSkelton />
-              )}
-            </div>
-          </div>
-          {userLoaded && user ? (
-            <div className="widgets">
-              <Widget
-                icon={calIcon}
-                grammage={user.keyData.calorieCount}
-                unit="Calories"
-              />
-              <Widget
-                icon={protIcon}
-                grammage={user.keyData.proteinCount}
-                unit="Proteines"
-              />
-              <Widget
-                icon={glucIcon}
-                grammage={user.keyData.carbohydrateCount}
-                unit="Glucides"
-              />
-
-              <Widget
-                icon={lipidIcon}
-                grammage={user.keyData.lipidCount}
-                unit="Proteines"
-              />
-            </div>
-          ) : (
-            <WidgetSkelton />
-          )}
-        </div>
-      </div>
-      ;
-    </>
-  );*/
 }
 
 export default Dashboard;

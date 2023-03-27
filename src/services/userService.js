@@ -30,8 +30,11 @@ async function getAllUserData(userId) {
         return response.data;
 
     } catch (error) {
-        console.error(error + "  this error comes from axios fetch ");
-
+        if (error.response && error.response.status === 404) {
+            throw new Error('Not Found');
+        } else {
+            console.error(error + "  this error comes from axios fetch ");
+        }
         //throw une exeption  pour verifier l'id 
         return false;
 
