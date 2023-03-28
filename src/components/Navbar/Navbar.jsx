@@ -1,10 +1,10 @@
 import React from "react";
 import "./navbar.css";
 import logo from "../../logo512.png";
-/** returns the navbar
+/** Displays  the navbar
  * @component
  *
- *  * @returns {HTMLElement}  A navbar
+ *  * @returns { HTMLElement }  A navbar
  */
 function Navbar() {
   return (

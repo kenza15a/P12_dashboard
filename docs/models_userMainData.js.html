@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Copywrite/Copywrite.jsx</title>
+    <title>JSDoc: Source: models/userMainData.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Copywrite/Copywrite.jsx</h1>
+    <h1 class="page-title">Source: models/userMainData.js</h1>
 
     
 
@@ -26,22 +26,21 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import "./copywrite.css";
+            <pre class="prettyprint source linenums"><code>import { userInfos } from "./userInfos";
+import { userKeyData } from "./userKeyData";
 /**
- * @component returns the copywrite text in the sidebar
- * @returns  
+ * @class userMaindata
+ * @classdesc modelise the user main info t
  */
-function Copywrite() {
-  return (
-    &lt;div className="copywrite-text">
-      &lt;p>Copiryght, SportSee 2020&lt;/p>
-    &lt;/div>
-  );
-}
+export class userMainData {
+    constructor(data) {
 
-export default Copywrite;
-</code></pre>
+        this.id = data.id;
+        this.userInfos = new userInfos(data.userInfos);
+        this.todayScore = data.todayScore;
+        this.keyData = new userKeyData(data.keyData);
+    }
+}</code></pre>
         </article>
     </section>
 

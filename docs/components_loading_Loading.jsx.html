@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Copywrite/Copywrite.jsx</title>
+    <title>JSDoc: Source: components/loading/Loading.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Copywrite/Copywrite.jsx</h1>
+    <h1 class="page-title">Source: components/loading/Loading.jsx</h1>
 
     
 
@@ -27,20 +27,25 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import "./copywrite.css";
+import "./loading.css";
+import Sidebar from "../Sidebar/Sidebar";
+import Navbar from "../Navbar/Navbar";
 /**
- * @component returns the copywrite text in the sidebar
- * @returns  
+ * Displays a loading message
+@returns {HTMLElement}  A loading message
  */
-function Copywrite() {
+function Loading() {
   return (
-    &lt;div className="copywrite-text">
-      &lt;p>Copiryght, SportSee 2020&lt;/p>
-    &lt;/div>
+    &lt;>
+      &lt;div className="loading">
+        &lt;p className="loading-message">please verify the path&lt;/p>
+        &lt;span className="notice">Please add "/Accueil/userId"&lt;/span>
+      &lt;/div>
+    &lt;/>
   );
 }
 
-export default Copywrite;
+export default Loading;
 </code></pre>
         </article>
     </section>

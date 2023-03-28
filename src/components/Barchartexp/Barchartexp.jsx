@@ -14,11 +14,11 @@ import {
 
 import "./barchart.css";
 /**
- * Some documented component
  *
- * @component
+ *
+ * @component Displays the barchart on the dashboard
  ** @param {Array.<Object>} data
- * @return 
+ * @return  {React.ReactElement}
  * ]
  *
  */
@@ -102,6 +102,6 @@ Barchartexp.propTypes = {
       calories: PropTypes.number,
       indice: PropTypes.number,
     })
-  ),
+  ).isRequired,
 };
 export default Barchartexp;

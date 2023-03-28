@@ -27,8 +27,8 @@ function Widget({ icon, grammage, unit }) {
 }
 
 Widget.propTypes = {
-  icon: PropTypes.string,
-  grammage: PropTypes.number,
-  unit: PropTypes.string,
+  icon: PropTypes.string.isRequired,
+  grammage: PropTypes.number.isRequired,
+  unit: PropTypes.string.isRequired
 };
 export default Widget;

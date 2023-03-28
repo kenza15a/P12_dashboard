@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Copywrite/Copywrite.jsx</title>
+    <title>JSDoc: Source: components/WidgetSkelton/WidgetSkelton.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Copywrite/Copywrite.jsx</h1>
+    <h1 class="page-title">Source: components/WidgetSkelton/WidgetSkelton.jsx</h1>
 
     
 
@@ -27,20 +27,58 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import "./copywrite.css";
+import Skeleton from "react-loading-skeleton";
+import "./widgetSkelton.css";
 /**
- * @component returns the copywrite text in the sidebar
- * @returns  
+ * 
+ * @returns {HTMLElement} a skelton for widgets
  */
-function Copywrite() {
+function WidgetSkelton() {
   return (
-    &lt;div className="copywrite-text">
-      &lt;p>Copiryght, SportSee 2020&lt;/p>
-    &lt;/div>
+    &lt;>
+      &lt;div className="widgets">
+        &lt;div className="widget-container-skel ">
+          &lt;div className="widget-icon-skel ">
+            &lt;Skeleton />
+          &lt;/div>
+
+          &lt;div className="grammage-skel ">
+            &lt;Skeleton count={2} />
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="widget-container-skel ">
+          &lt;div className="widget-icon-skel ">
+            &lt;Skeleton />
+          &lt;/div>
+
+          &lt;div className="grammage-skel ">
+            &lt;Skeleton count={2} />
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="widget-container-skel ">
+          &lt;div className="widget-icon-skel ">
+            &lt;Skeleton />
+          &lt;/div>
+
+          &lt;div className="grammage-skel ">
+            &lt;Skeleton count={2} />
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="widget-container-skel ">
+          &lt;div className="widget-icon-skel ">
+            &lt;Skeleton />
+          &lt;/div>
+
+          &lt;div className="grammage-skel ">
+            &lt;Skeleton count={2} />
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
   );
 }
 
-export default Copywrite;
+export default WidgetSkelton;
 </code></pre>
         </article>
     </section>

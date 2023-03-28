@@ -9,7 +9,7 @@ import {
 } from "recharts";
 import "./radialChart.css";
 /**
- * Returns a raidalbarchart representing the achievement of the user comparing to their daily goal
+ * Displays a raidalbarchart representing the achievement of the user comparing to their daily goal
  * ** @param {Array.<Object>} data
  */
 
@@ -66,7 +66,7 @@ Piechartexp.propTypes = {
     PropTypes.shape({
       todayScore: PropTypes.number,
     })
-  ),
+  ).isRequired,
 };
 
 export default Piechartexp;

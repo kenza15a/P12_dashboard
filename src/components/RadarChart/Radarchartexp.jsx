@@ -10,10 +10,10 @@ import {
 } from "recharts";
 import "./redarchart.css";
 /**
- * Returns the radarchart using the users performance data 
- * @component
+ a
+ * @component * Displays  the radarchart using the users performance dat
  ** @param {Array.<Object>} data
- * @returns
+ * @returns {React.ReactElement} a rechart radarchart
  */
 function Radarchartexp({ data }) {
   return (
@@ -45,7 +45,7 @@ Radarchartexp.propTypes = {
       kind: PropTypes.number,
       kindType: PropTypes.string,
     })
-  ),
+  ).isRequired,
 };
 
 export default Radarchartexp;

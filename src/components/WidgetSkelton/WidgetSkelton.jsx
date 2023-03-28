@@ -1,6 +1,10 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "./widgetSkelton.css";
+/**
+ * 
+ * @returns {HTMLElement} a skelton for widgets
+ */
 function WidgetSkelton() {
   return (
     <>

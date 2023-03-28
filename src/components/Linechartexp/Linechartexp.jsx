@@ -12,9 +12,9 @@ import {
 } from "recharts";
 /**
  *
- * @component  returns the linechart
+ * @component  Displays the linechart
  ** @param {Array.<Object>} data
- * @returns
+ * @returns  {React.ReactElement}.
  */
 function Linechartexp({ data }) {
   //rework the gray area
@@ -74,6 +74,6 @@ Linechartexp.propTypes = {
       sessionLength: PropTypes.number,
       lDay: PropTypes.string,
     })
-  ),
+  ).isRequired,
 };
 export default Linechartexp;

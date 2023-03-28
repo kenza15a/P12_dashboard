@@ -60,6 +60,11 @@ the currentEnvirement
 
 ### default user Id is 12 :the app will start by loading the data of user 12 by default
 
+### Routs and links
+
+Go to src/APP.js to find the right rout to start the app correctly
+
 ## the documentation of the project
 
 the Jsdoc documentation of the project is placed in the docs Folder
+Open the docs/Index.html file to read all the documentation

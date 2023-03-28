@@ -2,6 +2,10 @@ import React from "react";
 import "./loading.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
+/**
+ * Displays a loading message
+@returns {HTMLElement}  A loading message
+ */
 function Loading() {
   return (
     <>

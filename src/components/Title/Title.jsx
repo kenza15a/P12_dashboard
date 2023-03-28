@@ -1,8 +1,8 @@
 import "./title.css";
 import PropTypes from "prop-types";
 /**
- * 
- * @param { String } name the name of the current user 
+ *
+ * @param { String } name the name of the current user
  * @returns { HTMLElement } the Title
  */
 function Title({ name }) {
@@ -18,6 +18,6 @@ function Title({ name }) {
   );
 }
 Title.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
 };
 export default Title;

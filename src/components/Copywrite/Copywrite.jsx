@@ -2,7 +2,7 @@ import React from "react";
 import "./copywrite.css";
 /**
  * @component returns the copywrite text in the sidebar
- * @returns 
+ * @returns  
  */
 function Copywrite() {
   return (

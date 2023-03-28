@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Copywrite/Copywrite.jsx</title>
+    <title>JSDoc: Source: models/userPerformance.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Copywrite/Copywrite.jsx</h1>
+    <h1 class="page-title">Source: models/userPerformance.js</h1>
 
     
 
@@ -26,22 +26,19 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import "./copywrite.css";
+            <pre class="prettyprint source linenums"><code>//import userPerformanceKind from './userPerformanceKind';
 /**
- * @component returns the copywrite text in the sidebar
- * @returns  
+ * @class userPerformance
+ * @classdesc  modelise the user Performance to be displayed on the radar chart
  */
-function Copywrite() {
-  return (
-    &lt;div className="copywrite-text">
-      &lt;p>Copiryght, SportSee 2020&lt;/p>
-    &lt;/div>
-  );
-}
-
-export default Copywrite;
-</code></pre>
+export class userPerformance {
+    constructor(data) {
+        this.UseID = data.userId;
+        this.kind = data.kind;
+        // this.kind = new userPerformanceKind(data.kind);
+        this.data = data.data;
+    }
+}</code></pre>
         </article>
     </section>
 

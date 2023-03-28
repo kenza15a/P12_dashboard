@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Copywrite/Copywrite.jsx</title>
+    <title>JSDoc: Source: models/userAverageSession.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Copywrite/Copywrite.jsx</h1>
+    <h1 class="page-title">Source: models/userAverageSession.js</h1>
 
     
 
@@ -26,22 +26,19 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import "./copywrite.css";
-/**
- * @component returns the copywrite text in the sidebar
- * @returns  
+            <pre class="prettyprint source linenums"><code>/**
+ * @class
+ * @classdesc modelise the user average session
  */
-function Copywrite() {
-  return (
-    &lt;div className="copywrite-text">
-      &lt;p>Copiryght, SportSee 2020&lt;/p>
-    &lt;/div>
-  );
-}
+export class userAverageSession {
+   
+    constructor(data) {
+        this.userId = data.userId;
+        this.sessionLength = data.sessionLength;
 
-export default Copywrite;
-</code></pre>
+
+    }
+}</code></pre>
         </article>
     </section>
 

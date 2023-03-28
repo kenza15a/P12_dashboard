@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Copywrite/Copywrite.jsx</title>
+    <title>JSDoc: Source: components/ChartSkelton/ChartSkelton.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Copywrite/Copywrite.jsx</h1>
+    <h1 class="page-title">Source: components/ChartSkelton/ChartSkelton.jsx</h1>
 
     
 
@@ -27,20 +27,20 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import "./copywrite.css";
+import Skeleton from "react-loading-skeleton";
 /**
- * @component returns the copywrite text in the sidebar
- * @returns  
+ *
+ * @returns  { HtmlElement } a skelton for charts
  */
-function Copywrite() {
+function ChartSkelton() {
   return (
-    &lt;div className="copywrite-text">
-      &lt;p>Copiryght, SportSee 2020&lt;/p>
-    &lt;/div>
+    &lt;>
+      &lt;Skeleton width={180} height={180} />
+    &lt;/>
   );
 }
 
-export default Copywrite;
+export default ChartSkelton;
 </code></pre>
         </article>
     </section>

@@ -20,7 +20,7 @@ import ChartSkelton from "../ChartSkelton/ChartSkelton";
 import NotFoundMessage from "../NotFoundMessage/NotFoundMessage";
 /**
  * @component returns the dashboard with all the charts using the userId
- * @returns
+ * @returns  {React.ReactElement}.
  */
 
 function Dashboard() {
