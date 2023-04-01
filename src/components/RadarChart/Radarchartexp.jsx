@@ -11,7 +11,7 @@ import {
 import "./redarchart.css";
 /**
  a
- * @component * Displays  the radarchart using the users performance dat
+  * Displays  the radarchart using the users performance dat
  ** @param {Array.<Object>} data
  * @returns {React.ReactElement} a rechart radarchart
  */

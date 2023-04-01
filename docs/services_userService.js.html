@@ -44,6 +44,7 @@ export const userService = {
     getUserPerformance,
     getUserPerformanceData
 }
+const apiUrl = "http://localhost:3000/user/"
 /**
  * Get all the user's data using his id 
  * Fetching the api with Axious 
@@ -51,20 +52,26 @@ export const userService = {
  * @returns { Promise }
  */
 async function getAllUserData(userId) {
-    const apiUrl = "http://localhost:3000/user/"
+
     try {
         const response = await axios.get(`${apiUrl}${userId}`);
 
         return response.data;
 
     } catch (error) {
+
         if (error.response &amp;&amp; error.response.status === 404) {
             throw new Error('Not Found');
         } else {
-            console.error(error + "  this error comes from axios fetch ");
+            if (error.response &amp;&amp; error.response.status === 500) {
+
+                throw new Error('Not Available');
+            } else {
+                console.error(error.response.status + "  this error comes from axios fetch ");
+            }
+
         }
-        //throw une exeption  pour verifier l'id 
-        return false;
+
 
     }
 
@@ -81,7 +88,7 @@ async function getUserInfos(userId) {
     const allUserData = await getAllUserData(userId);
     console.log("id introuvable")
     console.log(allUserData);
-    if (!allUserData) return Promise.resolve("je n'ai pas trouvé les infos de lutilisaeur demandé")
+    if (!allUserData) return Promise.reject("je n'ai pas trouvé les infos de lutilisaeur demandé")
     const currentUserMainData = new userMainData(allUserData.data);
     return currentUserMainData;
 }
@@ -96,7 +103,7 @@ async function getUserInfos(userId) {
  * @returns { Promise }
  */
 async function getUserActivity(userId) { //barchart 
-    const apiUrl = "http://localhost:3000/user/"
+
     try {
         const response = await axios.get(`${apiUrl}${userId}/activity`);
         const currentUserActitivity = response.data;
@@ -145,7 +152,7 @@ async function getUserSessions(userId) {
  */
 async function getUserPerformance(userId) {
 
-    const apiUrl = "http://localhost:3000/user/"
+
 
     try {
         const response = await axios.get(`${apiUrl}${userId}/performance`);
@@ -226,7 +233,7 @@ async function getUserGoal(userId) {
  * @returns { Promise }
  */
 async function getUserAverageSession(userId) {
-    const apiUrl = "http://localhost:3000/user/";
+
     try {
         const response = await axios.get(`${apiUrl}${userId}/average-sessions`);
         const currentUserSesssions = response.data;
@@ -258,13 +265,13 @@ async function getUserAverageSession(userId) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barchartexp.html">Barchartexp</a></li><li><a href="Copywrite.html">Copywrite</a></li><li><a href="Dashboard.html">Dashboard</a></li><li><a href="Linechartexp.html">Linechartexp</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Radarchartexp.html">Radarchartexp</a></li><li><a href="userActivity.html">userActivity</a></li><li><a href="userAverageSession.html">userAverageSession</a></li><li><a href="userInfos.html">userInfos</a></li><li><a href="userKeyData.html">userKeyData</a></li><li><a href="userMaindata.html">userMaindata</a></li><li><a href="userPerformance.html">userPerformance</a></li><li><a href="userPerformanceData.html">userPerformanceData</a></li><li><a href="userSessions.html">userSessions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Accueil">Accueil</a></li><li><a href="global.html#ChartSkelton">ChartSkelton</a></li><li><a href="global.html#Communite">Communite</a></li><li><a href="global.html#Loading">Loading</a></li><li><a href="global.html#NotFoundMessage">NotFoundMessage</a></li><li><a href="global.html#Notfound">Notfound</a></li><li><a href="global.html#Piechartexp">Piechartexp</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Reglage">Reglage</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#Sidewidget">Sidewidget</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#Widget">Widget</a></li><li><a href="global.html#WidgetSkelton">WidgetSkelton</a></li><li><a href="global.html#getAllUserData">getAllUserData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSession">getUserAverageSession</a></li><li><a href="global.html#getUserGoal">getUserGoal</a></li><li><a href="global.html#getUserInfos">getUserInfos</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#getUserPerformanceData">getUserPerformanceData</a></li><li><a href="global.html#getUserService">getUserService</a></li><li><a href="global.html#getUserSessions">getUserSessions</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="userActivity.html">userActivity</a></li><li><a href="userAverageSession.html">userAverageSession</a></li><li><a href="userInfos.html">userInfos</a></li><li><a href="userKeyData.html">userKeyData</a></li><li><a href="userMaindata.html">userMaindata</a></li><li><a href="userPerformance.html">userPerformance</a></li><li><a href="userPerformanceData.html">userPerformanceData</a></li><li><a href="userSessions.html">userSessions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Accueil">Accueil</a></li><li><a href="global.html#Barchartexp">Barchartexp</a></li><li><a href="global.html#ChartSkelton">ChartSkelton</a></li><li><a href="global.html#Communite">Communite</a></li><li><a href="global.html#Copywrite">Copywrite</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Linechartexp">Linechartexp</a></li><li><a href="global.html#Loading">Loading</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#NotFoundMessage">NotFoundMessage</a></li><li><a href="global.html#Notfound">Notfound</a></li><li><a href="global.html#Piechartexp">Piechartexp</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Radarchartexp">Radarchartexp</a></li><li><a href="global.html#Reglage">Reglage</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#Sidewidget">Sidewidget</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#Widget">Widget</a></li><li><a href="global.html#WidgetSkelton">WidgetSkelton</a></li><li><a href="global.html#getAllUserData">getAllUserData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSession">getUserAverageSession</a></li><li><a href="global.html#getUserGoal">getUserGoal</a></li><li><a href="global.html#getUserInfos">getUserInfos</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#getUserPerformanceData">getUserPerformanceData</a></li><li><a href="global.html#getUserService">getUserService</a></li><li><a href="global.html#getUserSessions">getUserSessions</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Mar 28 2023 15:05:16 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Apr 02 2023 00:23:04 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

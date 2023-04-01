@@ -14,33 +14,8 @@ export const userMockedService = {
     getUserSessions,
     getUserActivity,
     getUserPerformanceData,
-    getIdsTab,
-    getAllUserData //to verify if the id exists
-
 }
-//try to catch id  the user not found exception
-function getIdsTab() {
-    let idsTab = [];
-    for (let i = 0; i < USER_MAIN_DATA.length; i++) {
-        idsTab.push(USER_MAIN_DATA[i].id);
-    }
 
-    return idsTab;
-}
-/**
-* get all the data of all the users
-
- * @return { Boolean } gotData
- */
-function getAllUserData() {
-    let gotData = true;
-    const userData = USER_MAIN_DATA;
-    if (!userData) {
-        gotData = false;
-    }
-    return gotData;
-
-}
 /**
  * Get the first part of the user info and create a model from it
  * Used here for the title part in the dashboard component 
@@ -53,6 +28,7 @@ async function getUserInfos(userId) { //title
     const userData = USER_MAIN_DATA.filter(item => item.id === userId).shift();
     if (!userData) return Promise.reject("aucun utilisateur trouvé")
     let userInfo = new userMainData(userData);
+    console.log(userInfo)
     return userInfo;
 }
 /**

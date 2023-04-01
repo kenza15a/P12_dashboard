@@ -16,6 +16,7 @@ export const userService = {
     getUserPerformance,
     getUserPerformanceData
 }
+const apiUrl = "http://localhost:3000/user/"
 /**
  * Get all the user's data using his id 
  * Fetching the api with Axious 
@@ -23,20 +24,26 @@ export const userService = {
  * @returns { Promise }
  */
 async function getAllUserData(userId) {
-    const apiUrl = "http://localhost:3000/user/"
+
     try {
         const response = await axios.get(`${apiUrl}${userId}`);
 
         return response.data;
 
     } catch (error) {
+
         if (error.response && error.response.status === 404) {
             throw new Error('Not Found');
         } else {
-            console.error(error + "  this error comes from axios fetch ");
+            if (error.response && error.response.status === 500) {
+
+                throw new Error('Not Available');
+            } else {
+                console.error(error.response.status + "  this error comes from axios fetch ");
+            }
+
         }
-        //throw une exeption  pour verifier l'id 
-        return false;
+
 
     }
 
@@ -53,7 +60,7 @@ async function getUserInfos(userId) {
     const allUserData = await getAllUserData(userId);
     console.log("id introuvable")
     console.log(allUserData);
-    if (!allUserData) return Promise.resolve("je n'ai pas trouvé les infos de lutilisaeur demandé")
+    if (!allUserData) return Promise.reject("je n'ai pas trouvé les infos de lutilisaeur demandé")
     const currentUserMainData = new userMainData(allUserData.data);
     return currentUserMainData;
 }
@@ -68,7 +75,7 @@ async function getUserInfos(userId) {
  * @returns { Promise }
  */
 async function getUserActivity(userId) { //barchart 
-    const apiUrl = "http://localhost:3000/user/"
+
     try {
         const response = await axios.get(`${apiUrl}${userId}/activity`);
         const currentUserActitivity = response.data;
@@ -117,7 +124,7 @@ async function getUserSessions(userId) {
  */
 async function getUserPerformance(userId) {
 
-    const apiUrl = "http://localhost:3000/user/"
+
 
     try {
         const response = await axios.get(`${apiUrl}${userId}/performance`);
@@ -198,7 +205,7 @@ async function getUserGoal(userId) {
  * @returns { Promise }
  */
 async function getUserAverageSession(userId) {
-    const apiUrl = "http://localhost:3000/user/";
+
     try {
         const response = await axios.get(`${apiUrl}${userId}/average-sessions`);
         const currentUserSesssions = response.data;

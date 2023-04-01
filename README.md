@@ -6,10 +6,15 @@ dashboard of a candidate showing their daily performance in an interactive way u
 # 2. Prerequisites
 
 Prerequisites for sporstsee dashboard
-[Nodejs ] must be installed if not you can download the last stable version from here:
+2.1 [Nodejs ] must be installed if not you can download the last stable version from here:
 https://nodejs.org/en/download
 
-Npm
+2.2 An IDE to work in such as
+VsCode
+Downloading link :
+https://code.visualstudio.com/download
+
+2.3 Npm
 
 # 3. Launching the project
 
@@ -20,15 +25,22 @@ To install and run the project follow the next steps
 To avoid ports confusions it is preferable to lunch the backend first to do so follow the next steps:
 Fork the repositry https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard
 Clone it on your computer.
+
 The yarn command will allow you to install the dependencies.
+
 The yarn dev command will allow you to run the micro API.
+
 The project will be lunched on the port 3000
+
 #Possible end Points
 This project includes four endpoints that you will be able to use:
 
 http://localhost:3000/user/${userId} - retrieves information from a user. This first endpoint includes the user id, user information (first name, last name and age), the current day's score (todayScore) and key data (calorie, macronutrient, etc.).
+
 http://localhost:3000/user/${userId}/activity - retrieves a user's activity day by day with kilograms and calories.
+
 http://localhost:3000/user/${userId}/average-sessions - retrieves the average sessions of a user per day. The week starts on Monday.
+
 http://localhost:3000/user/${userId}/performance - retrieves a user's performance (energy, endurance, etc.).
 Warning, currently only two users have been mocked. They have userId 12 and 18 respectively.
 

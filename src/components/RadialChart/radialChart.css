@@ -18,3 +18,9 @@
     color: #74798C;
     font-weight: 400;
 }
+
+.radialchart-title tspan {
+    font-size: 0.7rem;
+    font-weight: 500;
+
+}

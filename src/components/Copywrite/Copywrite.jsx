@@ -1,8 +1,8 @@
 import React from "react";
 import "./copywrite.css";
 /**
- * @component returns the copywrite text in the sidebar
- * @returns  
+ * returns the copywrite text in the sidebar
+ * @returns  { HTMLElement }
  */
 function Copywrite() {
   return (

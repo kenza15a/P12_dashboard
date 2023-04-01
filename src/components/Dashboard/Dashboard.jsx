@@ -11,15 +11,16 @@ import RadialChart from "../RadialChart/RadialChart";
 import Linechartexp from "../Linechartexp/Linechartexp";
 import Barchartexp from "../Barchartexp/Barchartexp";
 import { getUserService } from "../../services/userServiceConfiguration";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { defaulUserId } from "../../config/config";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import WidgetSkelton from "../WidgetSkelton/WidgetSkelton";
 import ChartSkelton from "../ChartSkelton/ChartSkelton";
 import NotFoundMessage from "../NotFoundMessage/NotFoundMessage";
+import NotAvailableMessage from "../NotAvailableMessage/NotAvailableMessage";
 /**
- * @component returns the dashboard with all the charts using the userId
+ * Displays the dashboard with all the charts using the userId
  * @returns  {React.ReactElement}.
  */
 
@@ -45,6 +46,7 @@ function Dashboard() {
   const [userGoal, setUserGoal] = useState();
   const [userGoalLoaded, setuserGoalLoaded] = useState(false);
   const [verifiedId, setVerifiedId] = useState(false);
+  const [apiLoaded, setApiLoaded] = useState(false);
 
   useEffect(getData, [id]);
 
@@ -52,16 +54,39 @@ function Dashboard() {
     getUserService()
       .getUserInfos(id)
       .then((userResponse) => {
-        if (userResponse !== 404) {
-          //in case the api is not loading
+        /** *if (userResponse === 404 || userResponse == null) {
+          //in case the api is well  loading modif
+         /* * throw new Error("Not Found");
+        } else {
+          if (userResponse === 500) {
+            throw new Error("API is down");
+          }
+        }*/
+        if (userResponse !== 404 || userResponse != null) {
+          //in case the api is well  loading modif
+
           setVerifiedId(true);
+          setUserLoaded(true);
+          setUser(userResponse);
+        }
+        if (userResponse !== 500) {
+          setApiLoaded(true);
         }
         setUserLoaded(true);
         setUser(userResponse);
       })
+
       .catch((error) => {
+        /**  if (error.message === "Not Found") {
+          setVerifiedId(false);
+        } else {
+          if (error.message === "API is down") {
+            setApiLoaded(false);
+          }
+        }**/
+
         console.log(
-          "UserInfos:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+          "UserInfo:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
         );
       });
     //barchart
@@ -161,23 +186,23 @@ function Dashboard() {
               <div className="widgets">
                 <Widget
                   icon={calIcon}
-                  grammage={user.keyData.calorieCount}
+                  grammage={user.keyData.calorieCount + "kCal"}
                   unit="Calories"
                 />
                 <Widget
                   icon={protIcon}
-                  grammage={user.keyData.proteinCount}
+                  grammage={user.keyData.proteinCount + "g"}
                   unit="Proteines"
                 />
                 <Widget
                   icon={glucIcon}
-                  grammage={user.keyData.carbohydrateCount}
+                  grammage={user.keyData.carbohydrateCount + "g"}
                   unit="Glucides"
                 />
 
                 <Widget
                   icon={lipidIcon}
-                  grammage={user.keyData.lipidCount}
+                  grammage={user.keyData.lipidCount + "g"}
                   unit="Lipides"
                 />
               </div>
@@ -188,9 +213,15 @@ function Dashboard() {
         </div>
       ) : (
         <div className="message-container">
-          <div className="message">
-            <NotFoundMessage />
-          </div>
+          {apiLoaded ? (
+            <div className="message">
+              <NotFoundMessage />
+            </div>
+          ) : (
+            <div className="message">
+              <NotAvailableMessage />
+            </div>
+          )}
         </div>
       )}
     </>

@@ -39,15 +39,16 @@ import RadialChart from "../RadialChart/RadialChart";
 import Linechartexp from "../Linechartexp/Linechartexp";
 import Barchartexp from "../Barchartexp/Barchartexp";
 import { getUserService } from "../../services/userServiceConfiguration";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { defaulUserId } from "../../config/config";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import WidgetSkelton from "../WidgetSkelton/WidgetSkelton";
 import ChartSkelton from "../ChartSkelton/ChartSkelton";
 import NotFoundMessage from "../NotFoundMessage/NotFoundMessage";
+import NotAvailableMessage from "../NotAvailableMessage/NotAvailableMessage";
 /**
- * @component returns the dashboard with all the charts using the userId
+ * Displays the dashboard with all the charts using the userId
  * @returns  {React.ReactElement}.
  */
 
@@ -73,6 +74,7 @@ function Dashboard() {
   const [userGoal, setUserGoal] = useState();
   const [userGoalLoaded, setuserGoalLoaded] = useState(false);
   const [verifiedId, setVerifiedId] = useState(false);
+  const [apiLoaded, setApiLoaded] = useState(false);
 
   useEffect(getData, [id]);
 
@@ -80,16 +82,39 @@ function Dashboard() {
     getUserService()
       .getUserInfos(id)
       .then((userResponse) => {
-        if (userResponse !== 404) {
-          //in case the api is not loading
+        /** *if (userResponse === 404 || userResponse == null) {
+          //in case the api is well  loading modif
+         /* * throw new Error("Not Found");
+        } else {
+          if (userResponse === 500) {
+            throw new Error("API is down");
+          }
+        }*/
+        if (userResponse !== 404 || userResponse != null) {
+          //in case the api is well  loading modif
+
           setVerifiedId(true);
+          setUserLoaded(true);
+          setUser(userResponse);
+        }
+        if (userResponse !== 500) {
+          setApiLoaded(true);
         }
         setUserLoaded(true);
         setUser(userResponse);
       })
+
       .catch((error) => {
+        /**  if (error.message === "Not Found") {
+          setVerifiedId(false);
+        } else {
+          if (error.message === "API is down") {
+            setApiLoaded(false);
+          }
+        }**/
+
         console.log(
-          "UserInfos:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+          "UserInfo:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
         );
       });
     //barchart
@@ -189,23 +214,23 @@ function Dashboard() {
               &lt;div className="widgets">
                 &lt;Widget
                   icon={calIcon}
-                  grammage={user.keyData.calorieCount}
+                  grammage={user.keyData.calorieCount + "kCal"}
                   unit="Calories"
                 />
                 &lt;Widget
                   icon={protIcon}
-                  grammage={user.keyData.proteinCount}
+                  grammage={user.keyData.proteinCount + "g"}
                   unit="Proteines"
                 />
                 &lt;Widget
                   icon={glucIcon}
-                  grammage={user.keyData.carbohydrateCount}
+                  grammage={user.keyData.carbohydrateCount + "g"}
                   unit="Glucides"
                 />
 
                 &lt;Widget
                   icon={lipidIcon}
-                  grammage={user.keyData.lipidCount}
+                  grammage={user.keyData.lipidCount + "g"}
                   unit="Lipides"
                 />
               &lt;/div>
@@ -216,9 +241,15 @@ function Dashboard() {
         &lt;/div>
       ) : (
         &lt;div className="message-container">
-          &lt;div className="message">
-            &lt;NotFoundMessage />
-          &lt;/div>
+          {apiLoaded ? (
+            &lt;div className="message">
+              &lt;NotFoundMessage />
+            &lt;/div>
+          ) : (
+            &lt;div className="message">
+              &lt;NotAvailableMessage />
+            &lt;/div>
+          )}
         &lt;/div>
       )}
     &lt;/>
@@ -236,13 +267,13 @@ export default Dashboard;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barchartexp.html">Barchartexp</a></li><li><a href="Copywrite.html">Copywrite</a></li><li><a href="Dashboard.html">Dashboard</a></li><li><a href="Linechartexp.html">Linechartexp</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Radarchartexp.html">Radarchartexp</a></li><li><a href="userActivity.html">userActivity</a></li><li><a href="userAverageSession.html">userAverageSession</a></li><li><a href="userInfos.html">userInfos</a></li><li><a href="userKeyData.html">userKeyData</a></li><li><a href="userMaindata.html">userMaindata</a></li><li><a href="userPerformance.html">userPerformance</a></li><li><a href="userPerformanceData.html">userPerformanceData</a></li><li><a href="userSessions.html">userSessions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Accueil">Accueil</a></li><li><a href="global.html#ChartSkelton">ChartSkelton</a></li><li><a href="global.html#Communite">Communite</a></li><li><a href="global.html#Loading">Loading</a></li><li><a href="global.html#NotFoundMessage">NotFoundMessage</a></li><li><a href="global.html#Notfound">Notfound</a></li><li><a href="global.html#Piechartexp">Piechartexp</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Reglage">Reglage</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#Sidewidget">Sidewidget</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#Widget">Widget</a></li><li><a href="global.html#WidgetSkelton">WidgetSkelton</a></li><li><a href="global.html#getAllUserData">getAllUserData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSession">getUserAverageSession</a></li><li><a href="global.html#getUserGoal">getUserGoal</a></li><li><a href="global.html#getUserInfos">getUserInfos</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#getUserPerformanceData">getUserPerformanceData</a></li><li><a href="global.html#getUserService">getUserService</a></li><li><a href="global.html#getUserSessions">getUserSessions</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="userActivity.html">userActivity</a></li><li><a href="userAverageSession.html">userAverageSession</a></li><li><a href="userInfos.html">userInfos</a></li><li><a href="userKeyData.html">userKeyData</a></li><li><a href="userMaindata.html">userMaindata</a></li><li><a href="userPerformance.html">userPerformance</a></li><li><a href="userPerformanceData.html">userPerformanceData</a></li><li><a href="userSessions.html">userSessions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Accueil">Accueil</a></li><li><a href="global.html#Barchartexp">Barchartexp</a></li><li><a href="global.html#ChartSkelton">ChartSkelton</a></li><li><a href="global.html#Communite">Communite</a></li><li><a href="global.html#Copywrite">Copywrite</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Linechartexp">Linechartexp</a></li><li><a href="global.html#Loading">Loading</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#NotFoundMessage">NotFoundMessage</a></li><li><a href="global.html#Notfound">Notfound</a></li><li><a href="global.html#Piechartexp">Piechartexp</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Radarchartexp">Radarchartexp</a></li><li><a href="global.html#Reglage">Reglage</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#Sidewidget">Sidewidget</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#Widget">Widget</a></li><li><a href="global.html#WidgetSkelton">WidgetSkelton</a></li><li><a href="global.html#getAllUserData">getAllUserData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSession">getUserAverageSession</a></li><li><a href="global.html#getUserGoal">getUserGoal</a></li><li><a href="global.html#getUserInfos">getUserInfos</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#getUserPerformanceData">getUserPerformanceData</a></li><li><a href="global.html#getUserService">getUserService</a></li><li><a href="global.html#getUserSessions">getUserSessions</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Mar 28 2023 15:05:16 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Apr 02 2023 00:23:04 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

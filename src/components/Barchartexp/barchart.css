@@ -28,3 +28,34 @@
     font-size: 0.8rem;
     color: #ffffff;
 }
+
+.horizontal-legend {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    font-size: 0.7rem;
+}
+
+.horizontal-legend .red {
+    color: red;
+}
+
+.horizontal-legend .black {
+    color: black;
+}
+
+.horizontal-legend .red span {
+    color: gray;
+}
+
+.horizontal-legend .black span {
+    color: gray;
+}
+
+.barchart-title tspan {
+    font-size: 0.7rem;
+    font-weight: 500;
+}

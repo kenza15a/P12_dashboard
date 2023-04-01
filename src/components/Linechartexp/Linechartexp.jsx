@@ -12,7 +12,7 @@ import {
 } from "recharts";
 /**
  *
- * @component  Displays the linechart
+ *Displays the linechart
  ** @param {Array.<Object>} data
  * @returns  {React.ReactElement}.
  */
@@ -22,7 +22,7 @@ function Linechartexp({ data }) {
     if (active && payload && payload.length) {
       return (
         <div className="linechart-tooltip">
-          <p className="session-length">{` ${payload[0].value}`}</p>
+          <p className="session-length">{` ${payload[0].value}`} min</p>
         </div>
       );
     }

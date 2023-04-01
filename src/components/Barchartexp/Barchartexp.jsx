@@ -16,7 +16,7 @@ import "./barchart.css";
 /**
  *
  *
- * @component Displays the barchart on the dashboard
+ * Displays the barchart on the dashboard
  ** @param {Array.<Object>} data
  * @return  {React.ReactElement}
  * ]
@@ -35,6 +35,16 @@ function Barchartexp({ data }) {
 
     return null;
   };
+  const CustomLegend = ({ payload }) => (
+    <ul className="horizontal-legend">
+      <li className="red">
+        <span>Poids (kg) </span>
+      </li>
+      <li className="black">
+        <span> calories brulées (kCal)</span>
+      </li>
+    </ul>
+  );
   //user_activity
   return (
     <>
@@ -60,9 +70,7 @@ function Barchartexp({ data }) {
           <Tooltip content={CustomTooltip} wrapperStyle={{ outline: "none" }} />
 
           <Legend
-            formatter={(value, entry, index) => (
-              <span className="legend-color-class">{value}</span>
-            )}
+            content={CustomLegend}
             verticalAlign="top"
             height={36}
             iconSize={5}
@@ -74,7 +82,9 @@ function Barchartexp({ data }) {
               color: "gray",
             }}
           />
-          <text>Activité quotidienne</text>
+          <text className="barchart-title" x={20} y={20}>
+            <tspan> Activité quotidienne</tspan>
+          </text>
 
           <Bar
             dataKey="kilogram"

@@ -42,6 +42,9 @@ function Piechartexp({ data }) {
             cornerRadius={circleSize / 2}
             fill="#FF0000"
           />
+          <text className="radialchart-title" x={20} y={20}>
+            <tspan>score</tspan>
+          </text>
           <text
             x={circleSize / 4}
             y={circleSize / 4}

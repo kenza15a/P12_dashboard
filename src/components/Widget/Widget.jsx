@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 /**
  *
  * @param { String } icon the Url of the icon
- * @param { Number } grammage a value 
+ * @param { Number } grammage a value
  * @param {String } unit calories/proteins/glucides/Lipides
- * @returns
+ * @returns { React.ReactElement }
  */
 function Widget({ icon, grammage, unit }) {
   return (
@@ -29,6 +29,6 @@ function Widget({ icon, grammage, unit }) {
 Widget.propTypes = {
   icon: PropTypes.string.isRequired,
   grammage: PropTypes.number.isRequired,
-  unit: PropTypes.string.isRequired
+  unit: PropTypes.string.isRequired,
 };
 export default Widget;

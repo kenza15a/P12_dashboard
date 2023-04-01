@@ -48,24 +48,28 @@
 dashboard of a candidate showing their daily performance in an interactive way using charts</p>
 <h1>2. Prerequisites</h1>
 <p>Prerequisites for sporstsee dashboard
-[Nodejs ] must be installed if not you can download the last stable version from here:
+2.1 [Nodejs ] must be installed if not you can download the last stable version from here:
 https://nodejs.org/en/download</p>
-<p>Npm</p>
+<p>2.2 An IDE to work in such as
+VsCode
+Downloading link :
+https://code.visualstudio.com/download</p>
+<p>2.3 Npm</p>
 <h1>3. Launching the project</h1>
 <p>To install and run the project follow the next steps</p>
 <h1>3.1 Launching the Backend</h1>
 <p>To avoid ports confusions it is preferable to lunch the backend first to do so follow the next steps:
 Fork the repositry https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard
-Clone it on your computer.
-The yarn command will allow you to install the dependencies.
-The yarn dev command will allow you to run the micro API.
-The project will be lunched on the port 3000
-#Possible end Points
+Clone it on your computer.</p>
+<p>The yarn command will allow you to install the dependencies.</p>
+<p>The yarn dev command will allow you to run the micro API.</p>
+<p>The project will be lunched on the port 3000</p>
+<p>#Possible end Points
 This project includes four endpoints that you will be able to use:</p>
-<p>http://localhost:3000/user/${userId} - retrieves information from a user. This first endpoint includes the user id, user information (first name, last name and age), the current day's score (todayScore) and key data (calorie, macronutrient, etc.).
-http://localhost:3000/user/${userId}/activity - retrieves a user's activity day by day with kilograms and calories.
-http://localhost:3000/user/${userId}/average-sessions - retrieves the average sessions of a user per day. The week starts on Monday.
-http://localhost:3000/user/${userId}/performance - retrieves a user's performance (energy, endurance, etc.).
+<p>http://localhost:3000/user/${userId} - retrieves information from a user. This first endpoint includes the user id, user information (first name, last name and age), the current day's score (todayScore) and key data (calorie, macronutrient, etc.).</p>
+<p>http://localhost:3000/user/${userId}/activity - retrieves a user's activity day by day with kilograms and calories.</p>
+<p>http://localhost:3000/user/${userId}/average-sessions - retrieves the average sessions of a user per day. The week starts on Monday.</p>
+<p>http://localhost:3000/user/${userId}/performance - retrieves a user's performance (energy, endurance, etc.).
 Warning, currently only two users have been mocked. They have userId 12 and 18 respectively.</p>
 <h1>3.2 Launching the Frontend</h1>
 <p>Start by cloning the following directory for the front end part :
@@ -102,13 +106,13 @@ Open the docs/Index.html file to read all the documentation</p></article>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Barchartexp.html">Barchartexp</a></li><li><a href="Copywrite.html">Copywrite</a></li><li><a href="Dashboard.html">Dashboard</a></li><li><a href="Linechartexp.html">Linechartexp</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Radarchartexp.html">Radarchartexp</a></li><li><a href="userActivity.html">userActivity</a></li><li><a href="userAverageSession.html">userAverageSession</a></li><li><a href="userInfos.html">userInfos</a></li><li><a href="userKeyData.html">userKeyData</a></li><li><a href="userMaindata.html">userMaindata</a></li><li><a href="userPerformance.html">userPerformance</a></li><li><a href="userPerformanceData.html">userPerformanceData</a></li><li><a href="userSessions.html">userSessions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Accueil">Accueil</a></li><li><a href="global.html#ChartSkelton">ChartSkelton</a></li><li><a href="global.html#Communite">Communite</a></li><li><a href="global.html#Loading">Loading</a></li><li><a href="global.html#NotFoundMessage">NotFoundMessage</a></li><li><a href="global.html#Notfound">Notfound</a></li><li><a href="global.html#Piechartexp">Piechartexp</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Reglage">Reglage</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#Sidewidget">Sidewidget</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#Widget">Widget</a></li><li><a href="global.html#WidgetSkelton">WidgetSkelton</a></li><li><a href="global.html#getAllUserData">getAllUserData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSession">getUserAverageSession</a></li><li><a href="global.html#getUserGoal">getUserGoal</a></li><li><a href="global.html#getUserInfos">getUserInfos</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#getUserPerformanceData">getUserPerformanceData</a></li><li><a href="global.html#getUserService">getUserService</a></li><li><a href="global.html#getUserSessions">getUserSessions</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="userActivity.html">userActivity</a></li><li><a href="userAverageSession.html">userAverageSession</a></li><li><a href="userInfos.html">userInfos</a></li><li><a href="userKeyData.html">userKeyData</a></li><li><a href="userMaindata.html">userMaindata</a></li><li><a href="userPerformance.html">userPerformance</a></li><li><a href="userPerformanceData.html">userPerformanceData</a></li><li><a href="userSessions.html">userSessions</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Accueil">Accueil</a></li><li><a href="global.html#Barchartexp">Barchartexp</a></li><li><a href="global.html#ChartSkelton">ChartSkelton</a></li><li><a href="global.html#Communite">Communite</a></li><li><a href="global.html#Copywrite">Copywrite</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Linechartexp">Linechartexp</a></li><li><a href="global.html#Loading">Loading</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#NotFoundMessage">NotFoundMessage</a></li><li><a href="global.html#Notfound">Notfound</a></li><li><a href="global.html#Piechartexp">Piechartexp</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Radarchartexp">Radarchartexp</a></li><li><a href="global.html#Reglage">Reglage</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#Sidewidget">Sidewidget</a></li><li><a href="global.html#Title">Title</a></li><li><a href="global.html#Widget">Widget</a></li><li><a href="global.html#WidgetSkelton">WidgetSkelton</a></li><li><a href="global.html#getAllUserData">getAllUserData</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserAverageSession">getUserAverageSession</a></li><li><a href="global.html#getUserGoal">getUserGoal</a></li><li><a href="global.html#getUserInfos">getUserInfos</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#getUserPerformanceData">getUserPerformanceData</a></li><li><a href="global.html#getUserService">getUserService</a></li><li><a href="global.html#getUserSessions">getUserSessions</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Mar 28 2023 15:05:16 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Apr 02 2023 00:23:04 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>

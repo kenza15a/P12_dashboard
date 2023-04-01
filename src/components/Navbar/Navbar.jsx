@@ -2,7 +2,7 @@ import React from "react";
 import "./navbar.css";
 import logo from "../../logo512.png";
 /** Displays  the navbar
- * @component
+ 
  *
  *  * @returns { HTMLElement }  A navbar
  */
