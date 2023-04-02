@@ -11,7 +11,7 @@ import RadialChart from "../RadialChart/RadialChart";
 import Linechartexp from "../Linechartexp/Linechartexp";
 import Barchartexp from "../Barchartexp/Barchartexp";
 import { getUserService } from "../../services/userServiceConfiguration";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { defaulUserId } from "../../config/config";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -45,8 +45,8 @@ function Dashboard() {
   const [userPerformanceLoaded, setPerformanceLoaded] = useState(false);
   const [userGoal, setUserGoal] = useState();
   const [userGoalLoaded, setuserGoalLoaded] = useState(false);
-  const [verifiedId, setVerifiedId] = useState(false);
-  const [apiLoaded, setApiLoaded] = useState(false);
+  const [verifiedId, setVerifiedId] = useState(true);
+  const [apiLoaded, setApiLoaded] = useState(true);
 
   useEffect(getData, [id]);
 
@@ -54,39 +54,28 @@ function Dashboard() {
     getUserService()
       .getUserInfos(id)
       .then((userResponse) => {
-        /** *if (userResponse === 404 || userResponse == null) {
-          //in case the api is well  loading modif
-         /* * throw new Error("Not Found");
-        } else {
-          if (userResponse === 500) {
-            throw new Error("API is down");
-          }
-        }*/
-        if (userResponse !== 404 || userResponse != null) {
-          //in case the api is well  loading modif
-
-          setVerifiedId(true);
-          setUserLoaded(true);
-          setUser(userResponse);
-        }
-        if (userResponse !== 500) {
-          setApiLoaded(true);
-        }
         setUserLoaded(true);
         setUser(userResponse);
+        if (userResponse === 404 || userResponse === null) {
+          //in case the api is well  loading modif
+          throw new Error("Not found");
+        }else{
+          if (userResponse === 500) {
+            throw new Error("API down");
+          }
+        }
+      
       })
-
       .catch((error) => {
-        /**  if (error.message === "Not Found") {
+        if (error.message === "Not Found") {
           setVerifiedId(false);
         } else {
-          if (error.message === "API is down") {
+          if (error.message === "API down") {
             setApiLoaded(false);
           }
-        }**/
-
+        }
         console.log(
-          "UserInfo:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
+          "UserInfos:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
         );
       });
     //barchart
