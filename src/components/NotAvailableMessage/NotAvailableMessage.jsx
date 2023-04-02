@@ -4,7 +4,10 @@ function NotAvailableMessage() {
   return (
     <>
       <div className="main-message">
-        <h1>500 Service Not available</h1>
+        <h1>There was an error try again later</h1>
+        <h2>
+          Go Back to <a href="/Accueil">Home Page</a>
+        </h2>
       </div>
     </>
   );

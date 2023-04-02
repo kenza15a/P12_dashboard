@@ -39,7 +39,7 @@ async function getAllUserData(userId) {
 
                 throw new Error('Not Available');
             } else {
-                console.error(error.response.status + "  this error comes from axios fetch ");
+                console.error(error.response.status + " Erreur Axios ");
             }
 
         }
@@ -58,8 +58,6 @@ async function getAllUserData(userId) {
 
 async function getUserInfos(userId) {
     const allUserData = await getAllUserData(userId);
-    console.log("id introuvable")
-    console.log(allUserData);
     if (!allUserData) return Promise.reject("je n'ai pas trouvé les infos de lutilisaeur demandé")
     const currentUserMainData = new userMainData(allUserData.data);
     return currentUserMainData;

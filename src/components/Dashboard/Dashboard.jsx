@@ -11,13 +11,12 @@ import RadialChart from "../RadialChart/RadialChart";
 import Linechartexp from "../Linechartexp/Linechartexp";
 import Barchartexp from "../Barchartexp/Barchartexp";
 import { getUserService } from "../../services/userServiceConfiguration";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { defaulUserId } from "../../config/config";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import WidgetSkelton from "../WidgetSkelton/WidgetSkelton";
 import ChartSkelton from "../ChartSkelton/ChartSkelton";
-import NotFoundMessage from "../NotFoundMessage/NotFoundMessage";
 import NotAvailableMessage from "../NotAvailableMessage/NotAvailableMessage";
 /**
  * Displays the dashboard with all the charts using the userId
@@ -45,8 +44,8 @@ function Dashboard() {
   const [userPerformanceLoaded, setPerformanceLoaded] = useState(false);
   const [userGoal, setUserGoal] = useState();
   const [userGoalLoaded, setuserGoalLoaded] = useState(false);
-  const [verifiedId, setVerifiedId] = useState(true);
-  const [apiLoaded, setApiLoaded] = useState(true);
+  const [verifiedAll, setVerifiedAll] = useState(true);
+  //const [apiLoaded, setApiLoaded] = useState(false);
 
   useEffect(getData, [id]);
 
@@ -56,24 +55,9 @@ function Dashboard() {
       .then((userResponse) => {
         setUserLoaded(true);
         setUser(userResponse);
-        if (userResponse === 404 || userResponse === null) {
-          //in case the api is well  loading modif
-          throw new Error("Not found");
-        }else{
-          if (userResponse === 500) {
-            throw new Error("API down");
-          }
-        }
-      
       })
       .catch((error) => {
-        if (error.message === "Not Found") {
-          setVerifiedId(false);
-        } else {
-          if (error.message === "API down") {
-            setApiLoaded(false);
-          }
-        }
+        setVerifiedAll(false);
         console.log(
           "UserInfos:Les données ne sont pas encore pretes ! verifiez si l'id de l'utilisateur est bon"
         );
@@ -129,7 +113,7 @@ function Dashboard() {
   }
   return (
     <>
-      {verifiedId ? (
+      {verifiedAll ? (
         <div className="main-container">
           <div className="page-title">
             {userLoaded && user ? (
@@ -202,15 +186,9 @@ function Dashboard() {
         </div>
       ) : (
         <div className="message-container">
-          {apiLoaded ? (
-            <div className="message">
-              <NotFoundMessage />
-            </div>
-          ) : (
-            <div className="message">
-              <NotAvailableMessage />
-            </div>
-          )}
+          <div className="message">
+            <NotAvailableMessage />
+          </div>
         </div>
       )}
     </>

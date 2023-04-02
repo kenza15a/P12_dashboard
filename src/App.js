@@ -23,7 +23,7 @@ function App() {
           <Route path="/Reglage" element={<Reglage />} />
           <Route path="/Communite" element={<Communite />} />
           <Route path="/not-available" element={<NotAvailablal />} />
-          <Route path="/*" element={<Notfound />} />
+          <Route path="/*" element={<NotAvailablal />} />
         </Routes>
       </BrowserRouter>
     </SkeletonTheme>
